@@ -1,0 +1,13 @@
+        <div class="mb-3">
+            <label for="folderId" class="form-label">所属文件夹</label>
+            <select class="form-control" id="folderId" name="folderId">
+                <option value="">未分配</option>
+                @if (ViewBag.Folders != null)
+                {
+                    foreach (var folder in ViewBag.Folders)
+                    {
+                        <option value="@folder.Id" @(Model.FolderId == folder.Id ? "selected" : "")>@folder.FolderName (@(folder.IsShared ? "共享" : "私有"))</option>
+                    }
+                }
+            </select>
+        </div> 

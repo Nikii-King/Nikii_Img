@@ -1,0 +1,305 @@
+{
+  "Files": [
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\obj\\Debug\\net6.0\\scopedcss\\projectbundle\\Nikii_Pic.bundle.scp.css",
+      "PackagePath": "staticwebassets\\Nikii_Pic.bundle.scp.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\css\\site.css",
+      "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\favicon.ico",
+      "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\img\\bgImg.png",
+      "PackagePath": "staticwebassets\\img\\bgImg.png"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\js\\site.js",
+      "PackagePath": "staticwebassets\\js\\site.js"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "PackagePath": "staticwebassets\\lib\\bootstrap"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.js"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\jquery.validate.unobtrusive.min.js"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\uploads\\19216e0a-32b9-4892-8d0e-4336798b94df.jpg",
+      "PackagePath": "staticwebassets\\uploads\\19216e0a-32b9-4892-8d0e-4336798b94df.jpg"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\uploads\\1b15d493-ccc1-41b4-9b35-e5d281b3923b.jpg",
+      "PackagePath": "staticwebassets\\uploads\\1b15d493-ccc1-41b4-9b35-e5d281b3923b.jpg"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\uploads\\1c4e21d7-a030-46ad-b55d-0457d31c430e.jpg",
+      "PackagePath": "staticwebassets\\uploads\\1c4e21d7-a030-46ad-b55d-0457d31c430e.jpg"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\uploads\\20af540b-349e-4e73-a407-4ebb73c4bcd6.jpg",
+      "PackagePath": "staticwebassets\\uploads\\20af540b-349e-4e73-a407-4ebb73c4bcd6.jpg"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\uploads\\2f963555-1a78-4407-9240-00f0d3912ff2.jpg",
+      "PackagePath": "staticwebassets\\uploads\\2f963555-1a78-4407-9240-00f0d3912ff2.jpg"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\uploads\\31e31377-754d-4989-8b17-c038ac4f97d2.jpg",
+      "PackagePath": "staticwebassets\\uploads\\31e31377-754d-4989-8b17-c038ac4f97d2.jpg"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\uploads\\a26e8041-e467-4e31-83b0-efa721b62311.jpg",
+      "PackagePath": "staticwebassets\\uploads\\a26e8041-e467-4e31-83b0-efa721b62311.jpg"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\uploads\\a3e9182f-e444-4d4e-b5f5-b3c5ca93fa36.jpg",
+      "PackagePath": "staticwebassets\\uploads\\a3e9182f-e444-4d4e-b5f5-b3c5ca93fa36.jpg"
+    },
+    {
+      "Id": "E:\\MYProject\\Nikii_Pic_Core\\Nikii_Pic\\wwwroot\\uploads\\b9db4093-e4c2-482c-8556-2a62966fa0c2.jpg",
+      "PackagePath": "staticwebassets\\uploads\\b9db4093-e4c2-482c-8556-2a62966fa0c2.jpg"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.Nikii_Pic.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.Nikii_Pic.props",
+      "PackagePath": "build\\Nikii_Pic.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.Nikii_Pic.props",
+      "PackagePath": "buildMultiTargeting\\Nikii_Pic.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.Nikii_Pic.props",
+      "PackagePath": "buildTransitive\\Nikii_Pic.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

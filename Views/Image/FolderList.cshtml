@@ -1,0 +1,140 @@
+@model List<Nikii_Pic.Models.ImageFolder>
+@{
+    ViewData["Title"] = "文件夹管理";
+}
+<style>
+    body {
+        background: linear-gradient(120deg, #e0e7ef 0%, #f7faff 100%);
+    }
+    .folder-list-card {
+        max-width: 900px;
+        margin: 40px auto 0 auto;
+        background: #fff;
+        border-radius: 24px;
+        box-shadow: 0 8px 40px 0 rgba(31,38,135,0.10), 0 1.5px 8px 0 rgba(31,38,135,0.06);
+        padding: 36px 32px 32px 32px;
+    }
+    .folder-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        letter-spacing: 1px;
+        color: #232526;
+    }
+    .table-folder {
+        border-radius: 16px;
+        overflow: hidden;
+        background: #f7f9fb;
+        box-shadow: 0 1px 6px rgba(31,38,135,0.06);
+    }
+    .table-folder th, .table-folder td {
+        vertical-align: middle;
+        font-size: 1.08rem;
+    }
+    .badge-shared {
+        background: linear-gradient(90deg, #4f8cff 0%, #38e8ff 100%);
+        color: #fff;
+        border-radius: 8px;
+        padding: 0.2em 0.9em;
+        font-size: 0.98rem;
+        font-weight: 600;
+    }
+    .badge-private {
+        background: #e3f0ff;
+        color: #1769ff;
+        border-radius: 8px;
+        padding: 0.2em 0.9em;
+        font-size: 0.98rem;
+        font-weight: 600;
+    }
+    .btn-folder {
+        border-radius: 8px;
+        font-weight: 600;
+        margin-right: 6px;
+        transition: background 0.2s, color 0.2s;
+    }
+    .btn-folder.btn-info {
+        background: #e3f0ff;
+        color: #1769ff;
+        border: none;
+    }
+    .btn-folder.btn-info:hover {
+        background: #4f8cff;
+        color: #fff;
+    }
+    .btn-folder.btn-danger {
+        background: #ffe3e3;
+        color: #ff3b3b;
+        border: none;
+    }
+    .btn-folder.btn-danger:hover {
+        background: #ff3b3b;
+        color: #fff;
+    }
+    .empty-state {
+        text-align: center;
+        padding: 60px 0 40px 0;
+        color: #b0b8c9;
+    }
+    .empty-state i {
+        font-size: 3.5rem;
+        color: #b0b8c9;
+    }
+    .empty-state h4 {
+        margin-top: 1.2rem;
+        font-weight: 600;
+        color: #7a7e8a;
+    }
+</style>
+<div class="folder-list-card">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <span class="folder-title">文件夹管理</span>
+        <a href="@Url.Action("CreateFolder", "Image")" class="btn btn-primary" style="border-radius:10px;font-weight:600;">新建文件夹</a>
+    </div>
+    @if (Model == null || !Model.Any())
+    {
+        <div class="empty-state">
+            <i class="bi bi-folder-x"></i>
+            <h4>暂无文件夹</h4>
+            <p>点击右上角"新建文件夹"开始管理吧！</p>
+        </div>
+    }
+    else
+    {
+        <table class="table table-folder">
+            <thead>
+                <tr>
+                    <th>文件夹名称</th>
+                    <th>共享状态</th>
+                    <th>创建时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var folder in Model)
+                {
+                    <tr>
+                        <td style="font-weight:600;">@folder.FolderName</td>
+                        <td>
+                            @if (folder.IsShared)
+                            {
+                                <span class="badge-shared">共享</span>
+                            }
+                            else
+                            {
+                                <span class="badge-private">私有</span>
+                            }
+                        </td>
+                        <td>@folder.CreateTime.ToString("yyyy-MM-dd HH:mm")</td>
+                        <td>
+                            <a href="@Url.Action("EditFolder", "Image", new { id = folder.Id })" class="btn btn-sm btn-folder btn-info">编辑</a>
+                            <form method="post" action="@Url.Action("DeleteFolder", "Image", new { id = folder.Id })" style="display:inline;" onsubmit="return confirm('确定要删除该文件夹吗？')">
+                                <button type="submit" class="btn btn-sm btn-folder btn-danger">删除</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div> 

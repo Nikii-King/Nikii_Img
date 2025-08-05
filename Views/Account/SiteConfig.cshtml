@@ -1,0 +1,112 @@
+@{
+    ViewBag.Title = "系统配置管理";
+}
+<style>
+.config-card {
+    max-width: 520px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(28,181,224,0.10);
+    padding: 36px 32px 28px 32px;
+    text-align: center;
+}
+.config-title {
+    font-size: 1.7rem;
+    font-weight: 800;
+    margin-bottom: 18px;
+    color: #222;
+    letter-spacing: 1px;
+}
+.config-row {
+    margin: 18px 0 18px 0;
+    font-size: 1.08rem;
+    color: #555;
+    text-align: left;
+}
+.config-label {
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: block;
+}
+.config-input {
+    width: 100%;
+    border-radius: 8px;
+    padding: 8px 14px;
+    border: 1.5px solid #eee;
+    font-size: 1.08rem;
+    margin-bottom: 8px;
+}
+#saveBtn {
+    border-radius: 22px;
+    font-size: 1.13rem;
+    background: #1cb5e0;
+    color: #fff;
+    font-weight: 800;
+    padding: 10px 38px;
+    border: none;
+    box-shadow: 0 2px 8px #1cb5e033;
+    transition: background 0.2s;
+    cursor: pointer;
+    margin-top: 18px;
+}
+#saveBtn:hover {
+    background: #0056e0;
+}
+</style>
+<div class="config-card">
+    <div class="config-title">系统配置管理</div>
+    <div class="config-row">
+        <label class="config-label" for="logoText">Logo文字</label>
+        <input type="text" class="config-input" id="logoText" value="@ViewBag.LogoText" />
+    </div>
+    <div class="config-row">
+        <label class="config-label" for="systemTitle">系统标题</label>
+        <input type="text" class="config-input" id="systemTitle" value="@ViewBag.SystemTitle" />
+    </div>
+    <div class="config-row">
+        <label class="config-label" for="announcement">公告内容</label>
+        <textarea class="config-input" id="announcement" rows="3">@ViewBag.Announcement</textarea>
+    </div>
+    <div class="config-row">
+        <label class="config-label" for="footer">页脚内容</label>
+        <input type="text" class="config-input" id="footer" value="@ViewBag.Footer" />
+    </div>
+    <div class="config-row">
+        <label class="config-label" for="domain">系统主域名</label>
+        <input type="text" class="config-input" id="domain" value="@ViewBag.Domain" placeholder="https://yourdomain.com" />
+    </div>
+    <button id="saveBtn">保存配置</button>
+    <button id="fixUrlBtn" style="margin-left:18px;background:#ffb6c1;">批量修正历史图片外链</button>
+    <div id="msg" style="margin-top:12px;color:#1cb5e0;font-weight:700;"></div>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$('#saveBtn').on('click', function(){
+    var data = {
+        logoText: $('#logoText').val(),
+        systemTitle: $('#systemTitle').val(),
+        announcement: $('#announcement').val(),
+        footer: $('#footer').val(),
+        domain: $('#domain').val()
+    };
+    $.post('/Account/SiteConfig', data, function(res){
+        if(res.success){
+            $('#msg').text('保存成功，刷新页面后生效！');
+        }else{
+            $('#msg').text('保存失败');
+        }
+    });
+});
+$('#fixUrlBtn').on('click', function(){
+    if(!confirm('确定要批量修正所有历史图片外链吗？')) return;
+    $('#msg').text('正在修正，请稍候...');
+    $.post('/Account/FixAllImageUrls', function(res){
+        if(res.success){
+            $('#msg').text('修正成功，共修正 '+res.count+' 条图片外链！');
+        }else{
+            $('#msg').text('修正失败：'+(res.msg||''));
+        }
+    });
+});
+</script> 

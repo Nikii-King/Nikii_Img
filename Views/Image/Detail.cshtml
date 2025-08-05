@@ -1,0 +1,167 @@
+@model Nikii_Pic.Models.Image
+@{
+    ViewData["Title"] = "图片详情";
+}
+
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">图片详情</h4>
+                    <a href="@Url.Action("Index", "Image")" class="btn btn-outline-secondary">
+                        <i class="bi bi-arrow-left"></i> 返回列表
+                    </a>
+                </div>
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <img src="/Image/Show/@Model.Id" class="img-fluid" alt="@Model.FileName" style="max-height: 500px;">
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>基本信息</h5>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td><strong>文件名：</strong></td>
+                                    <td>@Model.FileName</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>文件大小：</strong></td>
+                                    <td>@(Model.FileSize / 1024) KB</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>文件类型：</strong></td>
+                                    <td>@Model.FileType</td>
+                                </tr>
+                                <tr>
+                                    <td><strong>上传时间：</strong></td>
+                                    <td>@Model.UploadTime.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <h5>外链信息</h5>
+                            <div class="mb-3">
+                                <label class="form-label">外链地址</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" value="@Model.ImageUrl" readonly>
+                                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('@Model.ImageUrl')">
+                                        <i class="bi bi-clipboard"></i> 复制
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-3">
+                                <label class="form-label">Markdown 格式</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" value="![ @Model.FileName ](@Model.ImageUrl)" readonly>
+                                    <button class="btn btn-outline-secondary" type="button" onclick="copyToClipboard('![@Model.FileName](@Model.ImageUrl)')">
+                                        <i class="bi bi-clipboard"></i> 复制
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">编辑信息</h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="@Url.Action("Update", "Image", new { id = Model.Id })">
+                        <div class="mb-3">
+                            <label for="imageSource" class="form-label">图片来源说明</label>
+                            <input type="text" class="form-control" id="imageSource" name="imageSource" 
+                                   value="@Model.ImageSource" placeholder="如：网络下载、手机拍摄、截图等">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="imageCategory" class="form-label">图片类型说明</label>
+                            <input type="text" class="form-control" id="imageCategory" name="imageCategory" 
+                                   value="@Model.ImageCategory" placeholder="如：风景、人物、动物、美食等">
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="folderId" class="form-label">所属文件夹</label>
+                            <select class="form-control" id="folderId" name="folderId">
+                                <option value="">未分配</option>
+                                @if (ViewBag.Folders != null)
+                                {
+                                    foreach (var folder in ViewBag.Folders)
+                                    {
+                                        <option value="@folder.Id" @(Model.FolderId == folder.Id ? "selected" : "")>@folder.FolderName (@(folder.IsShared ? "共享" : "私有"))</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">保存修改</button>
+                            <form method="post" action="@Url.Action("Delete", "Image", new { id = Model.Id })" 
+                                  style="display: inline;" onsubmit="return confirm('确定要删除这张图片吗？')">
+                                <button type="submit" class="btn btn-danger">删除图片</button>
+                            </form>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            @if (!string.IsNullOrEmpty(Model.ImageSource) || !string.IsNullOrEmpty(Model.ImageCategory))
+            {
+                <div class="card mt-3">
+                    <div class="card-header">
+                        <h5 class="mb-0">附加信息</h5>
+                    </div>
+                    <div class="card-body">
+                        @if (!string.IsNullOrEmpty(Model.ImageSource))
+                        {
+                            <div class="mb-2">
+                                <strong>来源：</strong> @Model.ImageSource
+                            </div>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.ImageCategory))
+                        {
+                            <div class="mb-2">
+                                <strong>类型：</strong> @Model.ImageCategory
+                            </div>
+                        }
+                        @if (Model.Folder != null)
+                        {
+                            <div class="mb-2">
+                                <strong>文件夹：</strong> @Model.Folder.FolderName (@(Model.Folder.IsShared ? "共享" : "私有"))
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    function copyToClipboard(text) {
+        navigator.clipboard.writeText(text).then(function() {
+            // 显示成功提示
+            const button = event.target;
+            const originalText = button.innerHTML;
+            button.innerHTML = '<i class="bi bi-check"></i> 已复制';
+            button.classList.remove('btn-outline-secondary');
+            button.classList.add('btn-success');
+            
+            setTimeout(function() {
+                button.innerHTML = originalText;
+                button.classList.remove('btn-success');
+                button.classList.add('btn-outline-secondary');
+            }, 2000);
+        }).catch(function(err) {
+            console.error('复制失败: ', err);
+            alert('复制失败，请手动复制');
+        });
+    }
+</script> 

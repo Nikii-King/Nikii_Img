@@ -1,0 +1,476 @@
+@{
+    ViewBag.Title = "注册";
+}
+<style>
+    body, html {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        background: url('/img/bgImg.png') center/cover no-repeat fixed;
+    }
+    .reg-main {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .reg-card {
+        width: 900px;
+        min-height: 520px;
+        display: flex;
+        border-radius: 32px;
+        box-shadow: 0 8px 32px rgba(28,181,224,0.10);
+        overflow: hidden;
+        background: #fff;
+    }
+    .reg-left {
+        flex: 1;
+        background: #ffb6c1;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0 36px;
+    }
+    .reg-left .reg-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 18px;
+        letter-spacing: 2px;
+    }
+    .reg-left .reg-desc {
+        font-size: 1.1rem;
+        margin-bottom: 32px;
+        color: #fff;
+        opacity: 0.92;
+    }
+    .reg-left .reg-btn {
+        border-radius: 22px;
+        font-size: 1.13rem;
+        background: #fff;
+        color: #ff4081;
+        font-weight: 800;
+        padding: 10px 38px;
+        margin-top: 24px;
+        border: none;
+        box-shadow: 0 2px 8px #fff3;
+        transition: background 0.2s, color 0.2s;
+        cursor: pointer;
+    }
+    .reg-left .reg-btn:hover {
+        background: #ff4081;
+        color: #fff;
+    }
+    .reg-right {
+        flex: 1;
+        background: #fff;
+        color: #222;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 56px 56px 48px 56px;
+    }
+    .reg-form-title {
+        width: 100%;
+        text-align: left;
+        font-size: 2.3rem;
+        font-weight: 900;
+        color: #222;
+        letter-spacing: 2px;
+        margin-bottom: 32px;
+    }
+    .reg-form {
+        width: 100%;
+        max-width: 350px;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+    }
+    .reg-form .form-group {
+        width: 100%;
+        position: relative;
+    }
+    .reg-form .form-control {
+        width: 100%;
+        height: 48px;
+        border-radius: 16px;
+        border: 1.5px solid #eee;
+        background: #f5f7fa;
+        color: #222;
+        font-size: 1.13rem;
+        padding-left: 18px;
+        box-shadow: none;
+        margin-bottom: 0;
+    }
+    .reg-form .form-control:focus {
+        background: #fff0f6;
+        outline: none;
+        border: 1.5px solid #ffb6c1;
+    }
+    .reg-form .captcha-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .reg-form .captcha-img {
+        display: inline-block;
+        min-width: 70px;
+        font-size: 1.7rem;
+        font-weight: bold;
+        background: #fff;
+        border-radius: 8px;
+        border: 1.5px solid #eee;
+        color: #222;
+        text-align: center;
+        padding: 4px 12px;
+        cursor: pointer;
+        user-select: none;
+        letter-spacing: 4px;
+        box-shadow: 0 1px 4px #eee;
+    }
+    .reg-form .code-btn-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .reg-form .code-btn {
+        border-radius: 12px;
+        background: #ffb6c1;
+        color: #fff;
+        border: none;
+        padding: 0 18px;
+        font-size: 1.08rem;
+        font-weight: 800;
+        height: 38px;
+        box-shadow: 0 2px 8px #ffb6c133;
+        transition: background 0.2s;
+        cursor: pointer;
+    }
+    .reg-form .code-btn:disabled {
+        background: #ffc1cc;
+        color: #eee;
+    }
+    .reg-form .auth-btn {
+        width: 100%;
+        border-radius: 22px;
+        font-size: 1.18rem;
+        background: #ffb6c1;
+        border: none;
+        font-weight: 900;
+        letter-spacing: 1px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        color: #fff;
+        box-shadow: 0 2px 12px #ffb6c133;
+        transition: background 0.2s;
+        padding: 14px 0;
+        cursor: pointer;
+    }
+    .reg-form .auth-btn:hover {
+        background: #ff4081;
+    }
+    .reg-form .auth-error {
+        color: #ff6b6b;
+        text-align: left;
+        margin-bottom: 12px;
+        font-weight: 600;
+        animation: fadeIn 0.5s;
+    }
+    .reg-form .alert-success {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 12px;
+        border-radius: 16px;
+        font-size: 1.08rem;
+    }
+    @@media (max-width: 900px) {
+        .reg-card { flex-direction: column; width: 99vw; min-width: 0; }
+        .reg-left, .reg-right { padding: 32px 10px; }
+        .reg-form-title { text-align: center; }
+    }
+    /* 模态窗口样式 */
+    .modal-bg {
+        position: fixed;
+        left: 0; top: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.35);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s;
+    }
+    .modal-box {
+        background: linear-gradient(135deg, #fff 80%, #e3f2fd 100%);
+        border-radius: 24px;
+        padding: 38px 40px 28px 40px;
+        min-width: 360px;
+        box-shadow: 0 12px 48px rgba(28,181,224,0.22);
+        position: relative;
+        color: #222;
+        border: 2px solid #1cb5e0;
+    }
+    .modal-title {
+        font-size: 1.4rem;
+        font-weight: 800;
+        margin-bottom: 22px;
+        text-align: center;
+        letter-spacing: 1px;
+    }
+    .modal-close {
+        position: absolute;
+        right: 18px;
+        top: 12px;
+        font-size: 1.7rem;
+        color: #1cb5e0;
+        cursor: pointer;
+        font-weight: bold;
+        transition: color 0.2s;
+    }
+    .modal-close:hover { color: #ff4081; }
+    .modal-box .form-control {
+        height: 46px;
+        border-radius: 14px;
+        margin-bottom: 18px;
+        font-size: 1.08rem;
+        background: #f5f7fa;
+        border: 1.5px solid #e3f2fd;
+        color: #222;
+    }
+    .modal-btn {
+        border-radius: 20px;
+        padding: 8px 32px;
+        font-size: 1.08rem;
+        margin: 0 10px 0 0;
+        border: none;
+        font-weight: 700;
+        transition: background 0.2s;
+        box-shadow: 0 2px 8px #1cb5e033;
+    }
+    .modal-btn-black { background: #111; color: #fff; }
+    .modal-btn-purple { background: #8e8cfb; color: #fff; }
+    .modal-btn-black:hover { background: #333; }
+    .modal-btn-purple:hover { background: #6c63ff; }
+    .modal-btns-row { text-align: center; margin-top: 10px; }
+    @@keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    .split-btn {
+        border-radius: 22px;
+        font-size: 1.13rem;
+        background: linear-gradient(90deg, #1cb5e0 0%, #ff4081 100%);
+        border: none;
+        color: #fff;
+        font-weight: 800;
+        padding: 10px 38px;
+        margin-top: 24px;
+        margin-bottom: 0;
+        box-shadow: 0 2px 8px #1cb5e033;
+        transition: background 0.2s, color 0.2s;
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+    }
+    .split-btn:hover {
+        background: linear-gradient(90deg, #ff4081 0%, #1cb5e0 100%);
+        color: #fff;
+    }
+    /* 新增数字校验模态窗口样式 */
+    .num-modal-bg {
+        position: fixed;
+        left: 0; top: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.35);
+        z-index: 10000;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        animation: fadeIn 0.3s;
+    }
+    .num-modal-box {
+        background: #fff;
+        border-radius: 20px;
+        padding: 32px 36px 24px 36px;
+        min-width: 320px;
+        box-shadow: 0 8px 32px rgba(28,181,224,0.18);
+        position: relative;
+        color: #222;
+        border: 2px solid #1cb5e0;
+        text-align: center;
+    }
+    .num-modal-title {
+        font-size: 1.2rem;
+        font-weight: 700;
+        margin-bottom: 18px;
+    }
+    .num-modal-close {
+        position: absolute;
+        right: 18px;
+        top: 12px;
+        font-size: 1.5rem;
+        color: #1cb5e0;
+        cursor: pointer;
+        font-weight: bold;
+        transition: color 0.2s;
+    }
+    .num-modal-close:hover { color: #ff4081; }
+    .num-modal-btn {
+        border-radius: 16px;
+        padding: 7px 28px;
+        font-size: 1.08rem;
+        margin: 0 10px 0 0;
+        border: none;
+        font-weight: 700;
+        background: linear-gradient(90deg, #1cb5e0 0%, #ff4081 100%);
+        color: #fff;
+        box-shadow: 0 2px 8px #1cb5e033;
+        transition: background 0.2s;
+    }
+    .num-modal-btn:hover { background: linear-gradient(90deg, #ff4081 0%, #1cb5e0 100%); }
+</style>
+<div class="reg-main">
+    <div class="reg-card">
+        <div class="reg-left">
+            <div class="reg-title">已有账号?</div>
+            <div class="reg-desc">请登录🔑</div>
+            <a href="@Url.Action("Login", "Account")" class="reg-btn">登录</a>
+        </div>
+        <div class="reg-right">
+            <div class="reg-form-title">注册</div>
+            <form id="registerForm" class="reg-form" autocomplete="off">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="用户名" required id="usernameInput" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="密码" required id="passwordInput" />
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" placeholder="邮箱" required id="emailInput" />
+                </div>
+                <div class="form-group captcha-row">
+                    <input type="text" class="form-control" placeholder="图形验证码" required id="imgCodeInput" maxlength="4" style="flex:1;" />
+                    <span class="captcha-img" id="imgCodeBox" title="点击刷新"></span>
+                </div>
+                <div class="form-group code-btn-row">
+                    <input type="text" class="form-control" placeholder="邮箱验证码" required id="codeInput" maxlength="6" style="flex:1;" />
+                    <button type="button" class="code-btn" id="sendCodeBtn">获取验证码</button>
+                </div>
+                <button type="submit" class="auth-btn" id="registerBtn">注册</button>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 数字校验模态窗口 -->
+<div id="numModalBg" class="num-modal-bg" style="display:none;">
+    <div class="num-modal-box">
+        <span class="num-modal-close" id="numModalClose">&times;</span>
+        <div class="num-modal-title" id="numModalTitle">请完成数字校验</div>
+        <div class="mb-3">
+            <input type="text" class="form-control" id="numModalInput" placeholder="请输入答案" />
+        </div>
+        <button class="num-modal-btn" id="numModalSubmit">确定</button>
+    </div>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+// 图形验证码生成与刷新
+function refreshCaptcha() {
+    fetch('/Account/GetCaptcha')
+        .then(res => res.json())
+        .then(data => {
+            $('#imgCodeBox').text(data.code);
+        });
+}
+$(function(){
+    refreshCaptcha();
+    $('#imgCodeBox').on('click', refreshCaptcha);
+});
+
+// 标记是否已发送邮箱验证码
+let codeSent = false;
+
+// 获取邮箱验证码按钮
+$('#sendCodeBtn').off('click').on('click', function () {
+    var email = $('#emailInput').val();
+    var imgCodeInput = $('#imgCodeInput').val();
+    if (!email) {
+        alert('请先输入邮箱！');
+        return;
+    }
+    if (!imgCodeInput) {
+        alert('请先填写图形验证码！');
+        return;
+    }
+    var btn = this;
+    btn.disabled = true;
+    btn.innerText = '发送中...';
+    fetch('/Account/SendRegisterCode', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: 'email=' + encodeURIComponent(email) + '&captcha=' + encodeURIComponent(imgCodeInput)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            alert('验证码已发送，请查收邮箱');
+            var sec = 60;
+            btn.innerText = sec + '秒后重试';
+            var timer = setInterval(function() {
+                sec--;
+                btn.innerText = sec + '秒后重试';
+                if (sec <= 0) {
+                    clearInterval(timer);
+                    btn.disabled = false;
+                    btn.innerText = '获取验证码';
+                }
+            }, 1000);
+        } else {
+            alert(data.msg || data.message || '验证码发送失败');
+            refreshCaptcha && refreshCaptcha();
+            btn.disabled = false;
+            btn.innerText = '获取验证码';
+        }
+    })
+    .catch(() => {
+        alert('验证码发送失败');
+        btn.disabled = false;
+        btn.innerText = '获取验证码';
+    });
+});
+
+// 注册按钮AJAX提交
+$('#registerBtn').off('click').on('click', function (e) {
+    e.preventDefault();
+    var data = {
+        username: $('#usernameInput').val(),
+        password: $('#passwordInput').val(),
+        email: $('#emailInput').val(),
+        code: $('#codeInput').val(),
+        captcha: $('#imgCodeInput').val()
+    };
+    if (!data.captcha) {
+        alert('请填写图形验证码');
+        return;
+    }
+    $.ajax({
+        url: '/Account/Register',
+        type: 'POST',
+        data: data,
+        success: function (res) {
+            if (res.success) {
+                alert('注册成功，等待管理员审核！');
+                window.location.href = '/Account/Login';
+            } else {
+                alert(res.msg || '注册失败');
+            }
+        },
+        error: function () {
+            alert('注册请求失败');
+        }
+    });
+});
+</script>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" /> 

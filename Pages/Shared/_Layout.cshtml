@@ -1,0 +1,122 @@
+﻿<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - @Config["HomePage:LogoText"]</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Nikii_Pic.styles.css" asp-append-version="true" />
+    <style>
+        body, html {
+            background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);
+            min-height: 100vh;
+        }
+        .navbar-tech {
+            background: rgba(20,30,48,0.98);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.12);
+        }
+        .footer-tech {
+            background: transparent !important;
+            color: #8a99b3 !important;
+            font-size: 1rem;
+            border-top: 1px solid #e3e6ee !important;
+            margin-top: 64px;
+            padding-top: 18px !important;
+            padding-bottom: 18px !important;
+            box-shadow: none !important;
+        }
+        .container-body {
+            min-height: calc(100vh - 120px);
+        }
+        .footer-tech-dark {
+            background: linear-gradient(90deg, #232526 0%, #414345 100%) !important;
+            color: #e0e7ef !important;
+            font-size: 1rem;
+            border-top: 1.5px solid #2c3e50 !important;
+            margin-top: 64px;
+            padding-top: 18px !important;
+            padding-bottom: 18px !important;
+            box-shadow: none !important;
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body>
+    @inject Microsoft.Extensions.Configuration.IConfiguration Config
+    <!-- 科技感导航栏 -->
+    <nav class="navbar navbar-expand-lg navbar-tech navbar-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand fw-bold" href="/">@Config["HomePage:LogoText"]</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item"><a class="nav-link" href="/">首页</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="imgCenterDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            图片管理中心
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="imgCenterDropdown">
+                            <li><a class="dropdown-item" href="/Image/Index">我的图片</a></li>
+                            <li><a class="dropdown-item" href="/Image/Upload">上传图片</a></li>
+                            <li><a class="dropdown-item" href="/Image/BulkUpload">批量上传</a></li>
+                            <li><a class="dropdown-item" href="/Image/FolderList">文件夹管理</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                    @if (User.Identity != null && User.Identity.IsAuthenticated)
+                    {
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <i class="bi bi-person-circle"></i> 欢迎，@User.Identity.Name
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                @if (User.IsInRole("Admin"))
+                                {
+                                    <li><a class="dropdown-item" href="/Account/Review">用户审核中心</a></li>
+                                    <li><a class="dropdown-item" href="/Account/StorageSetting">图片存储设置</a></li>
+                                    <li><a class="dropdown-item" href="/Account/SiteConfig">系统配置管理</a></li>
+                                    <li><hr class="dropdown-divider" /></li>
+                                }
+                                <li><a class="dropdown-item" href="/User/Profile">个人中心</a></li>
+                                <li><a class="dropdown-item" href="/Account/Logout">退出登录</a></li>
+                            </ul>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Account/Login">登录</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Account/Register">注册</a>
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container container-body">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+    <footer class="footer-tech-dark py-3">
+        <div class="container text-center">
+            <span>@Config["HomePage:Footer"]</span>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

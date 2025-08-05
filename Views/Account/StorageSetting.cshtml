@@ -1,0 +1,80 @@
+@{
+    ViewBag.Title = "图片存储方式设置";
+}
+<style>
+.setting-card {
+    max-width: 480px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 4px 24px rgba(28,181,224,0.10);
+    padding: 36px 32px 28px 32px;
+    text-align: center;
+}
+.setting-title {
+    font-size: 1.7rem;
+    font-weight: 800;
+    margin-bottom: 18px;
+    color: #222;
+    letter-spacing: 1px;
+}
+.setting-row {
+    margin: 18px 0 28px 0;
+    font-size: 1.15rem;
+    color: #555;
+}
+.setting-select {
+    font-size: 1.1rem;
+    border-radius: 8px;
+    padding: 6px 18px;
+    border: 1.5px solid #eee;
+    margin-right: 12px;
+}
+#saveBtn {
+    border-radius: 22px;
+    font-size: 1.13rem;
+    background: #ffb6c1;
+    color: #fff;
+    font-weight: 800;
+    padding: 8px 38px;
+    border: none;
+    box-shadow: 0 2px 8px #ffb6c133;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+#saveBtn:hover {
+    background: #ff4081;
+}
+</style>
+<div class="setting-card">
+    <div class="setting-title">图片存储方式设置</div>
+    <div class="setting-row">
+        <b>当前存储方式：</b>
+        <span id="currentType" style="color:#ff4081;font-weight:700;">@ViewBag.StorageType</span>
+    </div>
+    <div class="setting-row">
+        <label for="storageType"><b>切换存储方式：</b></label>
+        <select id="storageType" class="setting-select">
+            <option value="File" @(ViewBag.StorageType=="File"?"selected":"")>文件夹</option>
+            <option value="Database" @(ViewBag.StorageType=="Database"?"selected":"")>数据库</option>
+        </select>
+        <button id="saveBtn">保存</button>
+    </div>
+    <div style="color:#888;font-size:0.98rem;line-height:1.7;">
+        <b>说明：</b>文件夹模式下图片存储在服务器本地，数据库模式下图片以二进制形式存储在数据库中。切换后新上传图片将按新方式保存，历史图片不自动迁移。
+    </div>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$('#saveBtn').on('click', function(){
+    var type = $('#storageType').val();
+    $.post('/Account/StorageSetting', { storageType: type }, function(res){
+        if(res.success){
+            alert('保存成功');
+            $('#currentType').text(type);
+        }else{
+            alert('保存失败');
+        }
+    });
+});
+</script> 

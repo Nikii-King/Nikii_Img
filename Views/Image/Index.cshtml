@@ -1,0 +1,335 @@
+@model List<Nikii_Pic.Models.Image>
+@{
+    ViewData["Title"] = "我的图片";
+}
+<style>
+    body {
+        background: linear-gradient(120deg, #e0e7ef 0%, #f7faff 100%);
+    }
+    .img-card {
+        border-radius: 20px;
+        box-shadow: 0 6px 32px 0 rgba(31,38,135,0.13);
+        border: none;
+        background: #fff;
+        transition: box-shadow 0.3s, transform 0.2s;
+        position: relative;
+        overflow: hidden;
+    }
+    .img-card:hover {
+        box-shadow: 0 16px 48px 0 rgba(31,38,135,0.22);
+        transform: translateY(-6px) scale(1.035);
+    }
+    .card-img-top {
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        transition: filter 0.3s;
+        height: 200px;
+        object-fit: cover;
+        width: 100%;
+    }
+    .img-card:hover .card-img-top {
+        filter: brightness(0.93) saturate(1.18);
+    }
+    .img-card .card-ops {
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        z-index: 2;
+        opacity: 0;
+        transition: opacity 0.2s;
+    }
+    .img-card:hover .card-ops {
+        opacity: 1;
+    }
+    .img-checkbox {
+        position: absolute;
+        top: 14px;
+        left: 14px;
+        z-index: 3;
+        width: 22px;
+        height: 22px;
+        accent-color: #4f8cff;
+        box-shadow: 0 1px 4px rgba(31,38,135,0.10);
+    }
+    .bulk-bar {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 18px;
+    }
+    .btn-bulk {
+        background: linear-gradient(90deg, #4f8cff 0%, #38e8ff 100%);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 0.5rem 1.5rem;
+        box-shadow: 0 2px 8px rgba(79,140,255,0.10);
+        transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+    .btn-bulk:disabled {
+        background: #b0bec5;
+        color: #fff;
+        cursor: not-allowed;
+    }
+    .btn-ops {
+        background: rgba(36, 37, 50, 0.82);
+        color: #fff;
+        border: none;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        margin-left: 6px;
+        font-size: 1.1rem;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s, transform 0.2s;
+    }
+    .btn-ops:hover {
+        background: #4f8cff;
+        color: #fff;
+        transform: scale(1.12);
+    }
+    .category-btn {
+        border-radius: 20px;
+        margin-right: 6px;
+        margin-bottom: 6px;
+        font-size: 0.98rem;
+        padding: 0.3rem 1.1rem;
+        border: 1.5px solid #4f8cff;
+        background: transparent;
+        color: #4f8cff;
+        transition: background 0.2s, color 0.2s;
+    }
+    .category-btn.active, .category-btn:active {
+        background: linear-gradient(90deg, #4f8cff 0%, #38e8ff 100%);
+        color: #fff !important;
+        border: none;
+    }
+    .my-title {
+        font-weight: 900;
+        font-size: 2.3rem;
+        color: #232526;
+        letter-spacing: 2px;
+        text-shadow: 0 2px 12px #e0e7ef;
+    }
+    .btn-upload-top {
+        background: linear-gradient(90deg, #4f8cff 0%, #38e8ff 100%);
+        color: #fff;
+        border: none;
+        border-radius: 16px;
+        font-weight: 700;
+        font-size: 1.1rem;
+        padding: 0.7rem 2.2rem;
+        box-shadow: 0 2px 12px rgba(79,140,255,0.10);
+        transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+    .btn-upload-top:hover {
+        background: linear-gradient(90deg, #38e8ff 0%, #4f8cff 100%);
+        box-shadow: 0 4px 24px rgba(79,140,255,0.18);
+        transform: translateY(-2px) scale(1.04);
+    }
+    .card-title {
+        font-weight: 700;
+        color: #232526;
+        font-size: 1.08rem;
+    }
+    .small.text-muted {
+        font-size: 0.98rem;
+    }
+    .pagination .page-link {
+        border-radius: 8px !important;
+        margin: 0 2px;
+        color: #4f8cff;
+        border: 1.5px solid #e3e6ee;
+        transition: background 0.2s, color 0.2s;
+    }
+    .pagination .page-item.active .page-link {
+        background: linear-gradient(90deg, #4f8cff 0%, #38e8ff 100%);
+        color: #fff;
+        border: none;
+    }
+    .pagination .page-link:hover {
+        background: #e3f0ff;
+        color: #1769ff;
+    }
+    .empty-state {
+        text-align: center;
+        padding: 80px 0 60px 0;
+        color: #b0b8c9;
+    }
+    .empty-state i {
+        font-size: 3.5rem;
+        color: #b0b8c9;
+    }
+    .empty-state h4 {
+        margin-top: 1.2rem;
+        font-weight: 600;
+        color: #7a7e8a;
+    }
+</style>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <span class="my-title">我的图片</span>
+                <div>
+                    <a href="@Url.Action("BulkUpload", "Image")" class="btn btn-upload-top me-2">
+                        <i class="bi bi-upload"></i> 批量上传
+                    </a>
+                    <a href="@Url.Action("Upload", "Image")" class="btn btn-upload-top">
+                        <i class="bi bi-plus-circle"></i> 上传图片
+                    </a>
+                </div>
+            </div>
+            <!-- 批量操作栏 -->
+            <div class="bulk-bar">
+                <input type="checkbox" id="selectAll" style="width:22px;height:22px;accent-color:#4f8cff;" />
+                <label for="selectAll" style="margin-bottom:0;user-select:none;">全选/取消全选</label>
+                <button class="btn-bulk" id="bulkDeleteBtn" disabled onclick="bulkDelete()">批量删除</button>
+                <span id="selectedCount" style="color:#4f8cff;font-weight:600;"></span>
+            </div>
+            <!-- 文件夹筛选 -->
+            <div class="mb-3 d-flex align-items-center gap-2">
+                <span style="font-weight:600;">文件夹：</span>
+                <form method="get" action="@Url.Action("Index", "Image")" class="d-inline-flex align-items-center gap-2">
+                    <select name="folderId" class="form-control" style="width:180px;display:inline-block;" onchange="this.form.submit()">
+                        <option value="">全部文件夹</option>
+                        @if (ViewBag.Folders != null)
+                        {
+                            foreach (var folder in ViewBag.Folders)
+                            {
+                                <option value="@folder.Id" @(ViewBag.FolderId != null && (int)ViewBag.FolderId == folder.Id ? "selected" : "")>@folder.FolderName (@(folder.IsShared ? "共享" : "私有"))</option>
+                            }
+                        }
+                    </select>
+                    @* 保持其他筛选参数 *@
+                    <input type="hidden" name="category" value="@ViewBag.Category" />
+                </form>
+            </div>
+            <!-- 分类筛选 -->
+            @if (ViewBag.Categories != null && ((List<string>)ViewBag.Categories).Count > 0)
+            {
+                <div class="mb-3">
+                    <div class="d-flex flex-wrap">
+                        <a href="@Url.Action("Index", "Image")" class="category-btn @(string.IsNullOrEmpty(ViewBag.Category) ? "active" : "")">
+                            全部
+                        </a>
+                        @foreach (var category in ViewBag.Categories)
+                        {
+                            <a href="@Url.Action("Index", "Image", new { category = category })" 
+                               class="category-btn @(ViewBag.Category == category ? "active" : "")">
+                                @category
+                            </a>
+                        }
+                    </div>
+                </div>
+            }
+            @if (!Model.Any())
+            {
+                <div class="empty-state">
+                    <i class="bi bi-images"></i>
+                    <h4>暂无图片</h4>
+                    <p>开始上传你的第一张图片吧！</p>
+                    <a href="@Url.Action("Upload", "Image")" class="btn btn-upload-top mt-2">上传图片</a>
+                </div>
+            }
+            else
+            {
+                <form id="bulkDeleteForm" method="post" action="@Url.Action("BulkDelete", "Image")">
+                <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 g-4">
+                    @foreach (var image in Model)
+                    {
+                        <div class="col">
+                            <div class="card img-card h-100">
+                                <input type="checkbox" class="img-checkbox" name="selectedIds" value="@image.Id" onclick="updateBulkBar()" />
+                                <div class="position-relative">
+                                    <img src="/Image/Show/@image.Id" class="card-img-top" alt="@image.FileName">
+                                    <div class="card-ops">
+                                        <a href="@Url.Action("Detail", "Image", new { id = image.Id })" class="btn-ops" title="详情"><i class="bi bi-eye"></i></a>
+                                        <button type="button" class="btn-ops" title="复制外链" onclick="copyImageUrl('@image.ImageUrl')"><i class="bi bi-link-45deg"></i></button>
+                                        <form method="post" action="@Url.Action("Delete", "Image", new { id = image.Id })" style="display:inline;" onsubmit="return confirm('确定要删除这张图片吗？')">
+                                            <button type="submit" class="btn-ops" title="删除"><i class="bi bi-trash"></i></button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <h6 class="card-title text-truncate" title="@image.FileName">@image.FileName</h6>
+                                    <div class="small text-muted">
+                                        <div>大小：@(image.FileSize / 1024) KB</div>
+                                        <div>上传：@image.UploadTime.ToString("yyyy-MM-dd HH:mm")</div>
+                                        @if (!string.IsNullOrEmpty(image.ImageCategory))
+                                        {
+                                            <div>类型：@image.ImageCategory</div>
+                                        }
+                                        @if (!string.IsNullOrEmpty(image.ImageSource))
+                                        {
+                                            <div>来源：@image.ImageSource</div>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                </form>
+                <!-- 分页 -->
+                @if (ViewBag.TotalPages > 1)
+                {
+                    <nav class="mt-4">
+                        <ul class="pagination justify-content-center">
+                            @if (ViewBag.CurrentPage > 1)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@Url.Action("Index", "Image", new { page = ViewBag.CurrentPage - 1, category = ViewBag.Category })">上一页</a>
+                                </li>
+                            }
+                            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+                            {
+                                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                                    <a class="page-link" href="@Url.Action("Index", "Image", new { page = i, category = ViewBag.Category })">@i</a>
+                                </li>
+                            }
+                            @if (ViewBag.CurrentPage < ViewBag.TotalPages)
+                            {
+                                <li class="page-item">
+                                    <a class="page-link" href="@Url.Action("Index", "Image", new { page = ViewBag.CurrentPage + 1, category = ViewBag.Category })">下一页</a>
+                                </li>
+                            }
+                        </ul>
+                    </nav>
+                }
+            }
+        </div>
+    </div>
+</div>
+<script>
+    // 复制外链功能
+    function copyImageUrl(url) {
+        navigator.clipboard.writeText(url).then(function() {
+            alert('外链地址已复制到剪贴板');
+        }).catch(function(err) {
+            console.error('复制失败: ', err);
+        });
+    }
+    // 批量选择逻辑
+    function updateBulkBar() {
+        const checkboxes = document.querySelectorAll('.img-checkbox');
+        const checked = document.querySelectorAll('.img-checkbox:checked');
+        document.getElementById('bulkDeleteBtn').disabled = checked.length === 0;
+        document.getElementById('selectedCount').innerText = checked.length > 0 ? `已选中${checked.length}项` : '';
+        document.getElementById('selectAll').checked = checked.length === checkboxes.length && checkboxes.length > 0;
+    }
+    document.getElementById('selectAll').addEventListener('change', function() {
+        const checked = this.checked;
+        document.querySelectorAll('.img-checkbox').forEach(cb => { cb.checked = checked; });
+        updateBulkBar();
+    });
+    function bulkDelete() {
+        if(confirm('确定要批量删除选中的图片吗？')) {
+            document.getElementById('bulkDeleteForm').submit();
+        }
+    }
+</script> 

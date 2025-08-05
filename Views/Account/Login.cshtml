@@ -1,0 +1,222 @@
+@{
+    ViewBag.Title = "登录";
+}
+<style>
+    body, html {
+        min-height: 100vh;
+        margin: 0;
+        padding: 0;
+        background: url('/img/bgImg.png') center/cover no-repeat fixed;
+    }
+    .login-main {
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .login-card {
+        width: 900px;
+        min-height: 520px;
+        display: flex;
+        border-radius: 32px;
+        box-shadow: 0 8px 32px rgba(28,181,224,0.10);
+        overflow: hidden;
+        background: #fff;
+    }
+    .login-left {
+        flex: 1;
+        background: #ffb6c1;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 0 36px;
+    }
+    .login-left .login-title {
+        font-size: 2.2rem;
+        font-weight: 800;
+        margin-bottom: 18px;
+        letter-spacing: 2px;
+    }
+    .login-left .login-desc {
+        font-size: 1.1rem;
+        margin-bottom: 32px;
+        color: #fff;
+        opacity: 0.92;
+    }
+    .login-left .login-btn {
+        border-radius: 22px;
+        font-size: 1.13rem;
+        background: #fff;
+        color: #ff4081;
+        font-weight: 800;
+        padding: 10px 38px;
+        margin-top: 24px;
+        border: none;
+        box-shadow: 0 2px 8px #fff3;
+        transition: background 0.2s, color 0.2s;
+        cursor: pointer;
+    }
+    .login-left .login-btn:hover {
+        background: #ff4081;
+        color: #fff;
+    }
+    .login-right {
+        flex: 1;
+        background: #fff;
+        color: #222;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 56px 56px 48px 56px;
+    }
+    .login-form-title {
+        width: 100%;
+        text-align: left;
+        font-size: 2.3rem;
+        font-weight: 900;
+        color: #222;
+        letter-spacing: 2px;
+        margin-bottom: 32px;
+    }
+    .login-form {
+        width: 100%;
+        max-width: 350px;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+    }
+    .login-form .form-group {
+        width: 100%;
+        position: relative;
+    }
+    .login-form .form-control {
+        width: 100%;
+        height: 48px;
+        border-radius: 16px;
+        border: 1.5px solid #eee;
+        background: #f5f7fa;
+        color: #222;
+        font-size: 1.13rem;
+        padding-left: 18px;
+        box-shadow: none;
+        margin-bottom: 0;
+    }
+    .login-form .form-control:focus {
+        background: #fff0f6;
+        outline: none;
+        border: 1.5px solid #ffb6c1;
+    }
+    .login-form .captcha-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    .login-form .captcha-img {
+        display: inline-block;
+        min-width: 70px;
+        font-size: 1.7rem;
+        font-weight: bold;
+        background: #fff;
+        border-radius: 8px;
+        border: 1.5px solid #eee;
+        color: #222;
+        text-align: center;
+        padding: 4px 12px;
+        cursor: pointer;
+        user-select: none;
+        letter-spacing: 4px;
+        box-shadow: 0 1px 4px #eee;
+    }
+    .login-form .auth-btn {
+        width: 100%;
+        border-radius: 22px;
+        font-size: 1.18rem;
+        background: #ffb6c1;
+        border: none;
+        font-weight: 900;
+        letter-spacing: 1px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        color: #fff;
+        box-shadow: 0 2px 12px #ffb6c133;
+        transition: background 0.2s;
+        padding: 14px 0;
+        cursor: pointer;
+    }
+    .login-form .auth-btn:hover {
+        background: #ff4081;
+    }
+    @@media (max-width: 900px) {
+        .login-card { flex-direction: column; width: 99vw; min-width: 0; }
+        .login-left, .login-right { padding: 32px 10px; }
+        .login-form-title { text-align: center; }
+    }
+</style>
+<div class="login-main">
+    <div class="login-card">
+        <div class="login-left">
+            <div class="login-title">还没有账号?</div>
+            <div class="login-desc">欢迎注册体验！</div>
+            <a href="@Url.Action("Register", "Account")" class="login-btn">注册</a>
+        </div>
+        <div class="login-right">
+            <div class="login-form-title">登录</div>
+            <form id="loginForm" class="login-form" autocomplete="off">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="用户名" required id="usernameInput" />
+                </div>
+                <div class="form-group">
+                    <input type="password" class="form-control" placeholder="密码" required id="passwordInput" />
+                </div>
+                <div class="form-group captcha-row">
+                    <input type="text" class="form-control" placeholder="图形验证码" required id="imgCodeInput" maxlength="4" style="flex:1;" />
+                    <span class="captcha-img" id="imgCodeBox" title="点击刷新"></span>
+                </div>
+                <button type="submit" class="auth-btn" id="loginBtn">登录</button>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+function refreshCaptcha() {
+    fetch('/Account/GetCaptcha')
+        .then(res => res.json())
+        .then(data => {
+            $('#imgCodeBox').text(data.code);
+        });
+}
+$(function(){
+    refreshCaptcha();
+    $('#imgCodeBox').on('click', refreshCaptcha);
+});
+$('#loginBtn').off('click').on('click', function (e) {
+    e.preventDefault();
+    $.ajax({
+        url: '/Account/Login',
+        type: 'POST',
+        data: {
+            username: $('#usernameInput').val(),
+            password: $('#passwordInput').val(),
+            captcha: $('#imgCodeInput').val()
+        },
+        headers: { 'X-Requested-With': 'XMLHttpRequest' },
+        success: function(res){
+            if(res.success){
+                window.location.href = '/';
+            }else{
+                alert(res.msg || '登录失败');
+                refreshCaptcha();
+            }
+        },
+        error: function(){
+            alert('登录请求失败');
+            refreshCaptcha();
+        }
+    });
+});
+</script> 

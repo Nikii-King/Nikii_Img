@@ -1,0 +1,67 @@
+@model IEnumerable<Nikii_Pic.Models.User>
+@{
+    ViewBag.Title = "审核历史";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+<style>
+    .review-card {
+        max-width: 900px;
+        margin: 40px auto 0 auto;
+        background: rgba(20,30,48,0.98);
+        border-radius: 22px;
+        box-shadow: 0 8px 32px rgba(28,181,224,0.18);
+        padding: 36px 36px 28px 36px;
+        color: #fff;
+    }
+    .review-title {
+        font-size: 2rem;
+        font-weight: 800;
+        letter-spacing: 2px;
+        margin-bottom: 24px;
+        text-align: center;
+    }
+    .review-table th, .review-table td {
+        color: #fff;
+        vertical-align: middle;
+        font-size: 1.08rem;
+    }
+    .review-table th {
+        background: linear-gradient(90deg,#1cb5e0 0%,#ff4081 100%);
+        border: none;
+    }
+    .review-table td {
+        background: rgba(255,255,255,0.05);
+        border: none;
+    }
+</style>
+<div class="review-card">
+    <div class="review-title">已审核用户历史</div>
+    @if (!Model.Any())
+    {
+        <div class="text-center text-success">暂无已审核用户</div>
+    }
+    else
+    {
+        <table class="table review-table">
+            <thead>
+                <tr>
+                    <th>用户名</th>
+                    <th>邮箱</th>
+                    <th>注册时间</th>
+                    <th>审核状态</th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var user in Model)
+            {
+                <tr>
+                    <td>@user.UserName</td>
+                    <td>@user.Email</td>
+                    <td>@user.RegisterTime.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td>已通过</td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    }
+</div> 

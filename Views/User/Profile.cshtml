@@ -1,0 +1,113 @@
+@model Nikii_Pic.Models.User
+@{
+    ViewData["Title"] = "个人中心";
+}
+<style>
+    body {
+        background: linear-gradient(120deg, #e0e7ef 0%, #f7faff 100%);
+    }
+    .profile-card {
+        max-width: 520px;
+        margin: 60px auto 0 auto;
+        background: #fff;
+        border-radius: 24px;
+        box-shadow: 0 8px 40px 0 rgba(31,38,135,0.10), 0 1.5px 8px 0 rgba(31,38,135,0.06);
+        padding: 36px 32px 32px 32px;
+    }
+    .profile-title {
+        font-size: 1.7rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        letter-spacing: 1px;
+        color: #232526;
+        text-align: center;
+    }
+    .profile-info {
+        margin-bottom: 1.5rem;
+    }
+    .profile-info strong {
+        color: #4f8cff;
+        font-weight: 600;
+    }
+    .profile-stats {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1.5rem;
+    }
+    .stat-box {
+        background: #f7f9fb;
+        border-radius: 14px;
+        padding: 18px 24px;
+        text-align: center;
+        flex: 1;
+        margin: 0 8px;
+        box-shadow: 0 1px 6px rgba(31,38,135,0.06);
+    }
+    .stat-box h3 {
+        font-size: 2rem;
+        color: #4f8cff;
+        margin-bottom: 0.2rem;
+        font-weight: 700;
+    }
+    .stat-box span {
+        color: #7a7e8a;
+        font-size: 1.05rem;
+    }
+    .profile-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 14px;
+        justify-content: center;
+    }
+    .profile-action-btn {
+        background: linear-gradient(90deg, #4f8cff 0%, #38e8ff 100%);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.08rem;
+        padding: 0.7rem 2.2rem;
+        box-shadow: 0 2px 12px rgba(79,140,255,0.10);
+        transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+        text-decoration: none;
+        text-align: center;
+    }
+    .profile-action-btn:hover {
+        background: linear-gradient(90deg, #38e8ff 0%, #4f8cff 100%);
+        box-shadow: 0 4px 24px rgba(79,140,255,0.18);
+        transform: translateY(-2px) scale(1.04);
+        color: #fff;
+    }
+</style>
+<div class="profile-card">
+    <div class="profile-title">个人中心</div>
+    <div class="profile-info">
+        <div><strong>用户名：</strong>@Model.UserName</div>
+        <div><strong>注册时间：</strong>@Model.RegisterTime.ToString("yyyy-MM-dd HH:mm")</div>
+        <div><strong>身份：</strong>@(Model.IsAdmin ? "管理员" : "普通用户")</div>
+        @if (!string.IsNullOrEmpty(Model.Email))
+        {
+            <div><strong>邮箱：</strong>@Model.Email</div>
+        }
+    </div>
+    <div class="profile-stats">
+        <div class="stat-box">
+            <h3>@ViewBag.ImageCount</h3>
+            <span>我的图片</span>
+        </div>
+        <div class="stat-box">
+            <h3>@ViewBag.FolderCount</h3>
+            <span>我的文件夹</span>
+        </div>
+        <div class="stat-box">
+            <h3>@ViewBag.DeletedCount</h3>
+            <span>已删除</span>
+        </div>
+    </div>
+    <div class="profile-actions">
+        <a href="@Url.Action("Index", "Image")" class="profile-action-btn">我的图片</a>
+        <a href="@Url.Action("Upload", "Image")" class="profile-action-btn">上传图片</a>
+        <a href="@Url.Action("BulkUpload", "Image")" class="profile-action-btn">批量上传</a>
+        <a href="@Url.Action("FolderList", "Image")" class="profile-action-btn">文件夹管理</a>
+    </div>
+</div> 

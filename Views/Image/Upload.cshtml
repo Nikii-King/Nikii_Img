@@ -1,0 +1,121 @@
+@{
+    ViewData["Title"] = "上传图片";
+}
+<style>
+    body {
+        background: #f7f9fb;
+    }
+    .upload-main-card {
+        max-width: 420px;
+        margin: 16px auto 0 auto;
+        background: #fff;
+        border-radius: 28px;
+        box-shadow: 0 8px 40px 0 rgba(31,38,135,0.10), 0 1.5px 8px 0 rgba(31,38,135,0.06);
+        padding: 48px 36px 36px 36px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .upload-title {
+        font-size: 2.1rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+        color: #232526;
+        margin-bottom: 2.2rem;
+    }
+    .form-control, .form-select {
+        border-radius: 10px;
+        font-size: 1.08rem;
+        padding: 0.7rem 1rem;
+        margin-bottom: 1.1rem;
+        border: 1.2px solid #e3e6ee;
+        box-shadow: none;
+        transition: border-color 0.2s;
+    }
+    .form-control:focus, .form-select:focus {
+        border-color: #4f8cff;
+        box-shadow: 0 0 0 0.13rem rgba(79,140,255,.10);
+    }
+    .btn-upload {
+        width: 100%;
+        background: #1769ff;
+        color: #fff;
+        font-size: 1.18rem;
+        font-weight: 600;
+        border-radius: 10px;
+        border: none;
+        padding: 0.85rem 0;
+        margin-top: 0.5rem;
+        margin-bottom: 1.2rem;
+        box-shadow: 0 2px 12px rgba(23,105,255,0.08);
+        transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+    .btn-upload:hover {
+        background: #0056e0;
+        box-shadow: 0 4px 24px rgba(23,105,255,0.13);
+        transform: translateY(-2px) scale(1.03);
+    }
+    .upload-link {
+        color: #1769ff;
+        text-decoration: underline;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+    }
+    .alert {
+        border-radius: 10px;
+        font-size: 1rem;
+        margin-bottom: 1.2rem;
+        width: 100%;
+        text-align: center;
+    }
+</style>
+<div class="upload-main-card">
+    <div class="upload-title">上传图片</div>
+    @if (!string.IsNullOrEmpty(ViewBag.Message))
+    {
+        <div class="alert @(ViewBag.Message.Contains("成功") ? "alert-success" : "alert-danger") alert-dismissible fade show" role="alert">
+            @ViewBag.Message
+            @if (!string.IsNullOrEmpty(ViewBag.ImageUrl))
+            {
+                <br />
+                <small>外链地址：<code>@ViewBag.ImageUrl</code></small>
+                <br />
+                <img src="@ViewBag.ImageUrl" alt="预览" style="max-width:180px;max-height:120px;margin-top:8px;border-radius:8px;box-shadow:0 2px 8px #eee;" />
+            }
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+    <form method="post" enctype="multipart/form-data" style="width:100%">
+        <input type="file" class="form-control" id="file" name="file" accept="image/*" required>
+        <div class="mb-3">
+            <label for="folderId" class="form-label">所属文件夹</label>
+            <select class="form-control" id="folderId" name="folderId">
+                <option value="">未分配</option>
+                @if (ViewBag.Folders != null)
+                {
+                    foreach (var folder in ViewBag.Folders)
+                    {
+                        <option value="@folder.Id">@folder.FolderName (@(folder.IsShared ? "共享" : "私有"))</option>
+                    }
+                }
+            </select>
+        </div>
+        <input type="text" class="form-control" id="imageSource" name="imageSource" placeholder="图片来源说明">
+        <input type="text" class="form-control" id="imageCategory" name="imageCategory" placeholder="图片类型说明">
+        <button type="submit" class="btn btn-upload">上传</button>
+    </form>
+    <a href="@Url.Action("Index", "Image")" class="upload-link">查看图片列表</a>
+</div>
+<script>
+    // 文件大小验证
+    document.getElementById('file').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            const maxSize = 10 * 1024 * 1024; // 10MB
+            if (file.size > maxSize) {
+                alert('文件大小不能超过10MB');
+                this.value = '';
+            }
+        }
+    });
+</script> 

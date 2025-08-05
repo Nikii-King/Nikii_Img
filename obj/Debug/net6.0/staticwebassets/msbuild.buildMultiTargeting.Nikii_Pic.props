@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\Nikii_Pic.props" />
+</Project>

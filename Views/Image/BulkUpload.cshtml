@@ -1,0 +1,194 @@
+@{
+    ViewData["Title"] = "批量上传图片";
+}
+<style>
+    body {
+        background: linear-gradient(120deg, #e0e7ef 0%, #f7faff 100%);
+    }
+    .bulk-upload-card {
+        max-width: 900px;
+        margin: 40px auto 0 auto;
+        background: #fff;
+        border-radius: 24px;
+        box-shadow: 0 8px 40px 0 rgba(31,38,135,0.10), 0 1.5px 8px 0 rgba(31,38,135,0.06);
+        padding: 36px 32px 32px 32px;
+    }
+    .bulk-title {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        letter-spacing: 1px;
+        color: #232526;
+    }
+    .img-preview {
+        width: 120px;
+        height: 90px;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(31,38,135,0.08);
+        margin-bottom: 8px;
+    }
+    .img-form {
+        background: #f7f9fb;
+        border-radius: 14px;
+        padding: 18px 18px 10px 18px;
+        margin-bottom: 18px;
+        box-shadow: 0 1px 6px rgba(31,38,135,0.06);
+        display: flex;
+        align-items: flex-start;
+        gap: 18px;
+    }
+    .img-form-fields {
+        flex: 1;
+    }
+    .form-control {
+        border-radius: 8px;
+        font-size: 1rem;
+        margin-bottom: 8px;
+    }
+    .btn-upload {
+        background: linear-gradient(90deg, #4f8cff 0%, #38e8ff 100%);
+        color: #fff;
+        border: none;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 1.1rem;
+        padding: 0.7rem 2.2rem;
+        box-shadow: 0 2px 12px rgba(79,140,255,0.10);
+        transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+    }
+    .btn-upload:hover {
+        background: linear-gradient(90deg, #38e8ff 0%, #4f8cff 100%);
+        box-shadow: 0 4px 24px rgba(79,140,255,0.18);
+        transform: translateY(-2px) scale(1.04);
+    }
+    .bulk-set-bar {
+        display: flex;
+        gap: 14px;
+        margin-bottom: 18px;
+        align-items: center;
+        justify-content: center;
+        flex-wrap: wrap;
+        background: #f7f9fb;
+        border-radius: 14px;
+        box-shadow: 0 1px 6px rgba(31,38,135,0.06);
+        padding: 18px 12px 10px 12px;
+    }
+    .bulk-set-bar input.form-control,
+    .bulk-set-bar select.form-control {
+        max-width: 170px;
+        min-width: 120px;
+        margin-bottom: 0;
+        border-radius: 8px;
+        font-size: 1rem;
+        box-shadow: none;
+    }
+    .btn-bulk-set {
+        background: linear-gradient(90deg, #4f8cff 0%, #38e8ff 100%);
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 1rem;
+        padding: 0.45rem 1.2rem;
+        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 8px rgba(79,140,255,0.10);
+        margin-left: 0;
+        margin-right: 8px;
+    }
+    .btn-bulk-set:last-child {
+        margin-right: 0;
+    }
+    .btn-bulk-set:hover {
+        background: linear-gradient(90deg, #38e8ff 0%, #4f8cff 100%);
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(79,140,255,0.18);
+        transform: translateY(-1px) scale(1.03);
+    }
+</style>
+<div class="bulk-upload-card">
+    <div class="bulk-title">批量上传图片</div>
+    <form id="bulkUploadForm" method="post" enctype="multipart/form-data" action="@Url.Action("BulkUpload", "Image")">
+        <div class="mb-3">
+            <input type="file" id="files" name="files" class="form-control" accept="image/*" multiple required onchange="handleFiles(this.files)">
+            <div class="form-text">可多选，支持JPG、PNG、GIF、BMP、WEBP，单张最大10MB</div>
+        </div>
+        <div class="bulk-set-bar">
+            <input type="text" id="bulkSource" class="form-control" style="max-width:180px;display:inline-block;" placeholder="批量设置来源说明">
+            <button type="button" class="btn-bulk-set" onclick="setAllSource()">一键填充来源</button>
+            <input type="text" id="bulkCategory" class="form-control" style="max-width:180px;display:inline-block;" placeholder="批量设置类型说明">
+            <button type="button" class="btn-bulk-set" onclick="setAllCategory()">一键填充类型</button>
+            <select id="bulkFolder" class="form-control" style="max-width:180px;display:inline-block;">
+                <option value="">批量设置文件夹</option>
+                @if (ViewBag.Folders != null)
+                {
+                    foreach (var folder in ViewBag.Folders)
+                    {
+                        <option value="@folder.Id">@folder.FolderName (@(folder.IsShared ? "共享" : "私有"))</option>
+                    }
+                }
+            </select>
+            <button type="button" class="btn-bulk-set" onclick="setAllFolder()">一键填充文件夹</button>
+        </div>
+        <div id="previewArea"></div>
+        <div class="d-grid mt-4">
+            <button type="submit" class="btn btn-upload">批量上传</button>
+        </div>
+    </form>
+</div>
+<script>
+    function handleFiles(files) {
+        const previewArea = document.getElementById('previewArea');
+        previewArea.innerHTML = '';
+        Array.from(files).forEach((file, idx) => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const div = document.createElement('div');
+                div.className = 'img-form';
+                div.innerHTML = `
+                    <img src="${e.target.result}" class="img-preview" alt="预览">
+                    <div class="img-form-fields">
+                        <div class="mb-2"><strong>${file.name}</strong> (${Math.round(file.size/1024)} KB)</div>
+                        <input type="text" class="form-control" name="imageSources" placeholder="图片来源说明" required>
+                        <input type="text" class="form-control" name="imageCategories" placeholder="图片类型说明" required>
+                        <select class="form-control" name="folderIds" style="margin-bottom:8px;">
+                            <option value="">选择文件夹（可选）</option>
+                            ${(window.folderOptionsHtml || '')}
+                        </select>
+                        <input type="hidden" name="fileIndexes" value="${idx}">
+                    </div>
+                `;
+                previewArea.appendChild(div);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+    // 批量填充来源说明
+    function setAllSource() {
+        const val = document.getElementById('bulkSource').value;
+        document.querySelectorAll('input[name="imageSources"]').forEach(input => input.value = val);
+    }
+    // 批量填充类型说明
+    function setAllCategory() {
+        const val = document.getElementById('bulkCategory').value;
+        document.querySelectorAll('input[name="imageCategories"]').forEach(input => input.value = val);
+    }
+    // 批量填充文件夹
+    function setAllFolder() {
+        const val = document.getElementById('bulkFolder').value;
+        document.querySelectorAll('select[name="folderIds"]').forEach(sel => sel.value = val);
+    }
+    // 生成文件夹选项HTML
+    window.folderOptionsHtml = (() => {
+        const sel = document.createElement('select');
+        sel.innerHTML = document.getElementById('bulkFolder')?.innerHTML || '';
+        return sel.innerHTML;
+    })();
+    // 防止未选图片时提交
+    document.getElementById('bulkUploadForm').addEventListener('submit', function(e) {
+        if(document.getElementById('files').files.length === 0) {
+            alert('请先选择图片文件！');
+            e.preventDefault();
+        }
+    });
+</script> 

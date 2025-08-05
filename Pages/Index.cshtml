@@ -1,0 +1,130 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "首页";
+}
+<style>
+    .banner-tech {
+        background: linear-gradient(120deg, #1cb5e0 0%, #000851 100%);
+        color: #fff;
+        border-radius: 24px;
+        box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+        padding: 56px 32px 48px 32px;
+        margin-top: 32px;
+        margin-bottom: 32px;
+        position: relative;
+        overflow: hidden;
+    }
+    .banner-tech::before {
+        content: '';
+        position: absolute;
+        left: 10%;
+        top: 10%;
+        width: 80%;
+        height: 80%;
+        background: radial-gradient(circle, rgba(28,181,224,0.18) 0%, transparent 80%);
+        z-index: 0;
+    }
+    .banner-title {
+        font-size: 2.8rem;
+        font-weight: 800;
+        letter-spacing: 2px;
+        z-index: 1;
+        position: relative;
+        text-shadow: 0 4px 24px #1cb5e0cc;
+    }
+    .banner-desc {
+        font-size: 1.3rem;
+        color: #e0f7fa;
+        margin-top: 18px;
+        z-index: 1;
+        position: relative;
+    }
+    .announcement-card {
+        background: rgba(255,255,255,0.92);
+        border-radius: 16px;
+        box-shadow: 0 2px 16px rgba(28,181,224,0.08);
+        padding: 24px 32px;
+        margin-bottom: 32px;
+        border-left: 6px solid #1cb5e0;
+        font-size: 1.1rem;
+        color: #222;
+    }
+    .main-btns .btn {
+        min-width: 140px;
+        font-size: 1.15rem;
+        border-radius: 24px;
+        margin: 0 12px 12px 0;
+        box-shadow: 0 2px 8px rgba(28,181,224,0.13);
+        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+    }
+    .main-btns .btn-primary {
+        background: linear-gradient(90deg, #1cb5e0 0%, #000851 100%);
+        border: none;
+    }
+    .main-btns .btn-primary:hover {
+        background: linear-gradient(90deg, #000851 0%, #1cb5e0 100%);
+        color: #fff;
+    }
+    .main-btns .btn-info {
+        background: linear-gradient(90deg, #43cea2 0%, #185a9d 100%);
+        border: none;
+        color: #fff;
+    }
+    .main-btns .btn-info:hover {
+        background: linear-gradient(90deg, #185a9d 0%, #43cea2 100%);
+        color: #fff;
+    }
+    .img-card {
+        border-radius: 18px;
+        box-shadow: 0 4px 24px 0 rgba(31,38,135,0.10);
+        border: 1px solid #e3e6ee;
+        transition: box-shadow 0.3s, transform 0.2s;
+        background: rgba(255,255,255,0.97);
+    }
+    .img-card:hover {
+        box-shadow: 0 12px 32px 0 rgba(31,38,135,0.18);
+        transform: translateY(-4px) scale(1.03);
+    }
+    .card-img-top {
+        border-top-left-radius: 18px;
+        border-top-right-radius: 18px;
+        transition: filter 0.3s;
+    }
+    .img-card:hover .card-img-top {
+        filter: brightness(0.95) saturate(1.2);
+    }
+    .card-title {
+        font-weight: 600;
+        color: #232526;
+    }
+</style>
+<div class="container">
+    <div class="banner-tech text-center">
+        <div class="banner-title">@Model.SystemTitle</div>
+        <div class="banner-desc">安全 · 高效 · 科技感的图片上传与管理平台</div>
+    </div>
+    <!-- 主要功能按钮 -->
+    <div class="main-btns text-center mb-5">
+        <a href="/Image/Upload" class="btn btn-primary me-2 mb-2">上传图片</a>
+        <a href="/Image/Index" class="btn btn-info me-2 mb-2">图片浏览</a>
+        <a href="@Url.Action("BulkUpload", "Image")" class="btn btn-outline-light me-2 mb-2" style="border:1.5px solid #1cb5e0;">批量上传</a>
+    </div>
+    <!-- 上传图片卡片 -->
+    <!-- 已移除上传图片卡片嵌套 -->
+    <!-- 公告卡片 -->
+    <div class="announcement-card">
+        <strong>公告：</strong> @Model.Announcement
+    </div>
+    <!-- 图片卡片展示区 -->
+    <!-- 已移除最新上传图片模块 -->
+</div>
+<script>
+    function copyImageUrl(url) {
+        navigator.clipboard.writeText(url).then(function() {
+            alert('外链地址已复制到剪贴板');
+        }).catch(function(err) {
+            console.error('复制失败: ', err);
+        });
+    }
+</script>
